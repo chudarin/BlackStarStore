@@ -11,26 +11,27 @@ class CategoryViewController: UIViewController {
 
     @IBOutlet weak var categoryTable: UITableView!
     
-//    let categories: [WelcomeValue]?
+    var categories: [ShopCategory] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LoadCategories { (category) in
-//            for (n, i) in category. {
-//                categories.append(category[i])
-//            }
-            print(category)
+        loadCategories { (category) in
+            self.categories = category
+            self.categoryTable.reloadData()
         }
     }
 }
 
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
+        cell.categoryNameLabel.text = categories[indexPath.row].name
+        cell.categoryImageView.image = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(categories[indexPath.row].image)")!))
         return cell
     }
 }

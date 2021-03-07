@@ -7,15 +7,16 @@
 
 import Foundation
 
-func LoadCategories(completion: @escaping (DecodedJSON) -> Void) {
+func loadCategories(completion: @escaping ([ShopCategory]) -> Void) {
     let apiURL = URL(string: "https://blackstarshop.ru/index.php?route=api/v1/categories")
-    let session = URLSession.shared.dataTask(with: apiURL!) { (data, response, error) in
-        let decoder = JSONDecoder()
-        let jsonData = Data(data.utf8)
-        let decodedData = try! decoder.decode(DecodedJSON.self, from: data!)
+    let session = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
+        let decodedData = try! JSONDecoder().decode(ParsedJSON.self, from: data!)
+        var values: [ShopCategory] = []
         DispatchQueue.main.async {
-            completion(decodedData)
-            print(decodedData)
+            for (_, el) in decodedData.innerArray.enumerated() {
+                values.append(el.value)
+            }
+            completion(values)
         }
     }
     session.resume()
