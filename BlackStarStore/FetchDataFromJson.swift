@@ -21,3 +21,20 @@ func loadCategories(completion: @escaping ([ShopCategory]) -> Void) {
     }
     session.resume()
 }
+
+func loadProducts(id: Int, completion: @escaping ([Product]) -> Void) {
+    let apiURL = URL(string: "https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(id)")
+    let session = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
+        let decodedData = try! JSONDecoder().decode(ParsedProducts.self, from: data!)
+        var products: [Product] = []
+        DispatchQueue.main.async {
+            for (_, el) in decodedData.innerArray.enumerated() {
+                products.append(el.value)
+//                print(el.value)
+            }
+            completion(products)
+//            print(products)
+        }
+    }
+    session.resume()
+}
