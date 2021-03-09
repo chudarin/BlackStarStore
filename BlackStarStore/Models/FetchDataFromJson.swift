@@ -23,7 +23,8 @@ func loadCategories(completion: @escaping ([ShopCategory]) -> Void) {
 }
 
 func loadProducts(id: Int, completion: @escaping ([Product]) -> Void) {
-    let apiURL = URL(string: "https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(id)")
+    let url = "https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(id)"
+    let apiURL = URL(string: url)
     let session = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
         let decodedData = try! JSONDecoder().decode(ParsedProducts.self, from: data!)
         var products: [Product] = []

@@ -15,7 +15,7 @@ class SubCategoryViewController: UIViewController {
     var subCategoryTitle: String = ""
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? ProductsViewController, segue.identifier == "openProducts" {
+        if let vc = segue.destination as? ProductsListViewController, segue.identifier == "openProducts" {
             if let cell = sender as? UITableViewCell, let indexPath = subCategoryTable.indexPath(for: cell) {
                 vc.productsID = subCategories[indexPath.row].id
                 vc.productsTitle = subCategories[indexPath.row].name
