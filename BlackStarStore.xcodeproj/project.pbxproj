@@ -19,6 +19,7 @@
 		B541135225F8FE9A00A0B0B8 /* ModalWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541135125F8FE9A00A0B0B8 /* ModalWindowViewController.swift */; };
 		B595727625FA4E6A009413E4 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595727525FA4E6A009413E4 /* CartViewController.swift */; };
 		B595727F25FA4EA5009413E4 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595727E25FA4EA5009413E4 /* CartTableViewCell.swift */; };
+		B595729025FA52C4009413E4 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595728F25FA52C4009413E4 /* Realm.swift */; };
 		B59A4FE825F74B3B009FF253 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A4FE725F74B3B009FF253 /* ProductViewController.swift */; };
 		B5AAF04725F9088600EE367E /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AAF04625F9088600EE367E /* PresentationController.swift */; };
 		B5AAF04C25F90A5F00EE367E /* ModalWindowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AAF04B25F90A5F00EE367E /* ModalWindowViewController.xib */; };
@@ -70,6 +71,7 @@
 		B541135125F8FE9A00A0B0B8 /* ModalWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalWindowViewController.swift; sourceTree = "<group>"; };
 		B595727525FA4E6A009413E4 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		B595727E25FA4EA5009413E4 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		B595728F25FA52C4009413E4 /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		B59A4FE725F74B3B009FF253 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		B5AAF04625F9088600EE367E /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		B5AAF04B25F90A5F00EE367E /* ModalWindowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalWindowViewController.xib; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				B523756925F1573000A65115 /* FetchDataFromJson.swift */,
 				B523756425F156F500A65115 /* Category.swift */,
 				B513930425F55DEF006CD4F8 /* Product.swift */,
+				B595728F25FA52C4009413E4 /* Realm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				B523756525F156F500A65115 /* Category.swift in Sources */,
 				B5BAED1425F5014600E70EC9 /* SubCategoryTableViewCell.swift in Sources */,
 				B5AAF04725F9088600EE367E /* PresentationController.swift in Sources */,
+				B595729025FA52C4009413E4 /* Realm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

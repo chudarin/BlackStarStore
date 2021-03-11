@@ -6,6 +6,7 @@ target 'BlackStarStore' do
 
   use_frameworks!
   pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
+  pod 'RealmSwift', '=10.1.4'
 
   # Pods for BlackStarStore
 
