@@ -39,10 +39,16 @@ struct Product: Codable {
     let description, colorName, colorImageURL, mainImage: String
     let productImages: [ProductImage]
     let price: String
+    let offers: [Offers]
 }
 
 
 // MARK: - ProductImage
 struct ProductImage: Codable {
     let imageURL, sortOrder: String
+}
+
+struct Offers: Codable {
+    let size: String
+    let quantity: String
 }

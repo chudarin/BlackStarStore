@@ -8,7 +8,7 @@
 import UIKit
 
 class ProductsListViewController: UIViewController {
-
+    
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
     var productsID: OptionalTypes?
@@ -36,7 +36,10 @@ class ProductsListViewController: UIViewController {
                 vc.productName = products[indexPath.row].name
                 vc.productPrice = products[indexPath.row].price
                 vc.productDescription = products[indexPath.row].description
-                for i in products[indexPath.row].productImages { vc.productGallery.append(i.imageURL) }
+                for i in products[indexPath.row].productImages {
+                    vc.productGallery.append(i.imageURL)
+                }
+                vc.productOffers = products[indexPath.row].offers
             }
         }
     }
@@ -49,10 +52,11 @@ class ProductsListViewController: UIViewController {
         self.title = productsTitle
         super.viewDidLoad()
     }
-
+    
 }
 
-extension ProductsListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ProductsListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count
     }
@@ -61,13 +65,20 @@ extension ProductsListViewController: UICollectionViewDelegate, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Product", for: indexPath) as! ProductsListCollectionViewCell
         
         cell.productImageView.contentMode = .scaleAspectFill
-
+        
         cell.productNameLabel.text = products[indexPath.row].name
         cell.productDescriptionLabel.text = products[indexPath.row].description
         cell.productImageView.image = products[indexPath.row].mainImage != "" ? UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(products[indexPath.row].mainImage)")!)) : UIImage(named: "no_image")
         cell.productPriceLabel.text = convertToPrice(products[indexPath.row].price)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat =  5
+        let collectionViewSize = collectionView.frame.size.width - padding
+        
+        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
     }
     
 }

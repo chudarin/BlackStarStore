@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		782952F1ABE978DDEAF1FCF7 /* Pods_BlackStarStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E847A2C1B2928B96B8736F2C /* Pods_BlackStarStore.framework */; };
+		9D2AD9953A516D3F0F27B5CC /* Pods_BlackStarStoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908B2457BE3F6E4F518E57FC /* Pods_BlackStarStoreTests.framework */; };
 		B51392F825F5590B006CD4F8 /* ProductsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51392F725F5590B006CD4F8 /* ProductsListViewController.swift */; };
 		B513930025F55983006CD4F8 /* ProductsListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51392FF25F55983006CD4F8 /* ProductsListCollectionViewCell.swift */; };
 		B513930525F55DEF006CD4F8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513930425F55DEF006CD4F8 /* Product.swift */; };
@@ -14,7 +16,12 @@
 		B523756025F156AD00A65115 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B523755F25F156AD00A65115 /* CategoryTableViewCell.swift */; };
 		B523756525F156F500A65115 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B523756425F156F500A65115 /* Category.swift */; };
 		B523756A25F1573000A65115 /* FetchDataFromJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = B523756925F1573000A65115 /* FetchDataFromJson.swift */; };
+		B541135225F8FE9A00A0B0B8 /* ModalWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541135125F8FE9A00A0B0B8 /* ModalWindowViewController.swift */; };
+		B595727625FA4E6A009413E4 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595727525FA4E6A009413E4 /* CartViewController.swift */; };
+		B595727F25FA4EA5009413E4 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595727E25FA4EA5009413E4 /* CartTableViewCell.swift */; };
 		B59A4FE825F74B3B009FF253 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A4FE725F74B3B009FF253 /* ProductViewController.swift */; };
+		B5AAF04725F9088600EE367E /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AAF04625F9088600EE367E /* PresentationController.swift */; };
+		B5AAF04C25F90A5F00EE367E /* ModalWindowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AAF04B25F90A5F00EE367E /* ModalWindowViewController.xib */; };
 		B5BAED1425F5014600E70EC9 /* SubCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAED1325F5014500E70EC9 /* SubCategoryTableViewCell.swift */; };
 		B5BAED1925F5017F00E70EC9 /* SubCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAED1825F5017F00E70EC9 /* SubCategoryViewController.swift */; };
 		B5C1C08825F151F3008C39AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1C08725F151F3008C39AD /* AppDelegate.swift */; };
@@ -24,6 +31,8 @@
 		B5C1C09425F151F5008C39AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C1C09225F151F5008C39AD /* LaunchScreen.storyboard */; };
 		B5C1C09F25F151F5008C39AD /* BlackStarStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1C09E25F151F5008C39AD /* BlackStarStoreTests.swift */; };
 		B5C1C0AA25F151F5008C39AD /* BlackStarStoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1C0A925F151F5008C39AD /* BlackStarStoreUITests.swift */; };
+		B5F63ED525F8A1DE00D659FC /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F63ED425F8A1DE00D659FC /* ProductCollectionViewCell.swift */; };
+		F6BDA998933C94CD1A0B95C4 /* Pods_BlackStarStore_BlackStarStoreUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546238FB620E3DFDBE9CCB5B /* Pods_BlackStarStore_BlackStarStoreUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		193D9AEF88BA447CFA776A9C /* Pods-BlackStarStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackStarStore.release.xcconfig"; path = "Target Support Files/Pods-BlackStarStore/Pods-BlackStarStore.release.xcconfig"; sourceTree = "<group>"; };
+		2F88A19025A119A3E88E72B6 /* Pods-BlackStarStoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackStarStoreTests.release.xcconfig"; path = "Target Support Files/Pods-BlackStarStoreTests/Pods-BlackStarStoreTests.release.xcconfig"; sourceTree = "<group>"; };
+		4FE4F8A9E8018C07C1D4D6B4 /* Pods-BlackStarStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackStarStore.debug.xcconfig"; path = "Target Support Files/Pods-BlackStarStore/Pods-BlackStarStore.debug.xcconfig"; sourceTree = "<group>"; };
+		546238FB620E3DFDBE9CCB5B /* Pods_BlackStarStore_BlackStarStoreUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlackStarStore_BlackStarStoreUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69870F8DB4690A9873DE2385 /* Pods-BlackStarStore-BlackStarStoreUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackStarStore-BlackStarStoreUITests.debug.xcconfig"; path = "Target Support Files/Pods-BlackStarStore-BlackStarStoreUITests/Pods-BlackStarStore-BlackStarStoreUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		908B2457BE3F6E4F518E57FC /* Pods_BlackStarStoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlackStarStoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEE062519A453E030EF098B3 /* Pods-BlackStarStore-BlackStarStoreUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackStarStore-BlackStarStoreUITests.release.xcconfig"; path = "Target Support Files/Pods-BlackStarStore-BlackStarStoreUITests/Pods-BlackStarStore-BlackStarStoreUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B51392F725F5590B006CD4F8 /* ProductsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListViewController.swift; sourceTree = "<group>"; };
 		B51392FF25F55983006CD4F8 /* ProductsListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListCollectionViewCell.swift; sourceTree = "<group>"; };
 		B513930425F55DEF006CD4F8 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -51,7 +67,12 @@
 		B523755F25F156AD00A65115 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		B523756425F156F500A65115 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B523756925F1573000A65115 /* FetchDataFromJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataFromJson.swift; sourceTree = "<group>"; };
+		B541135125F8FE9A00A0B0B8 /* ModalWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalWindowViewController.swift; sourceTree = "<group>"; };
+		B595727525FA4E6A009413E4 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		B595727E25FA4EA5009413E4 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		B59A4FE725F74B3B009FF253 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		B5AAF04625F9088600EE367E /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		B5AAF04B25F90A5F00EE367E /* ModalWindowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalWindowViewController.xib; sourceTree = "<group>"; };
 		B5BAED1325F5014500E70EC9 /* SubCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		B5BAED1825F5017F00E70EC9 /* SubCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryViewController.swift; sourceTree = "<group>"; };
 		B5C1C08425F151F3008C39AD /* BlackStarStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackStarStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +88,9 @@
 		B5C1C0A525F151F5008C39AD /* BlackStarStoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackStarStoreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C1C0A925F151F5008C39AD /* BlackStarStoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackStarStoreUITests.swift; sourceTree = "<group>"; };
 		B5C1C0AB25F151F5008C39AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5F63ED425F8A1DE00D659FC /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE9E98863A45E278C108915C /* Pods-BlackStarStoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackStarStoreTests.debug.xcconfig"; path = "Target Support Files/Pods-BlackStarStoreTests/Pods-BlackStarStoreTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E847A2C1B2928B96B8736F2C /* Pods_BlackStarStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlackStarStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				782952F1ABE978DDEAF1FCF7 /* Pods_BlackStarStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D2AD9953A516D3F0F27B5CC /* Pods_BlackStarStoreTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,18 +114,45 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6BDA998933C94CD1A0B95C4 /* Pods_BlackStarStore_BlackStarStoreUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EFBCCC16066448E3314BBD9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4FE4F8A9E8018C07C1D4D6B4 /* Pods-BlackStarStore.debug.xcconfig */,
+				193D9AEF88BA447CFA776A9C /* Pods-BlackStarStore.release.xcconfig */,
+				69870F8DB4690A9873DE2385 /* Pods-BlackStarStore-BlackStarStoreUITests.debug.xcconfig */,
+				AEE062519A453E030EF098B3 /* Pods-BlackStarStore-BlackStarStoreUITests.release.xcconfig */,
+				CE9E98863A45E278C108915C /* Pods-BlackStarStoreTests.debug.xcconfig */,
+				2F88A19025A119A3E88E72B6 /* Pods-BlackStarStoreTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B595727A25FA4E87009413E4 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				B595727525FA4E6A009413E4 /* CartViewController.swift */,
+				B595727E25FA4EA5009413E4 /* CartTableViewCell.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
 		B59A4FD725F74AE7009FF253 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B59A4FE725F74B3B009FF253 /* ProductViewController.swift */,
+				B5AAF04625F9088600EE367E /* PresentationController.swift */,
 				B51392F725F5590B006CD4F8 /* ProductsListViewController.swift */,
 				B51392FF25F55983006CD4F8 /* ProductsListCollectionViewCell.swift */,
+				B5F63ED425F8A1DE00D659FC /* ProductCollectionViewCell.swift */,
+				B59A4FE725F74B3B009FF253 /* ProductViewController.swift */,
+				B541135125F8FE9A00A0B0B8 /* ModalWindowViewController.swift */,
+				B5AAF04B25F90A5F00EE367E /* ModalWindowViewController.xib */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -139,6 +192,8 @@
 				B5C1C09D25F151F5008C39AD /* BlackStarStoreTests */,
 				B5C1C0A825F151F5008C39AD /* BlackStarStoreUITests */,
 				B5C1C08525F151F3008C39AD /* Products */,
+				4EFBCCC16066448E3314BBD9 /* Pods */,
+				C41FFA4179E03D8D497C7891 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +217,7 @@
 				B59A4FDF25F74AF8009FF253 /* Category */,
 				B59A4FDB25F74AF0009FF253 /* Sub Category */,
 				B59A4FD725F74AE7009FF253 /* Products */,
+				B595727A25FA4E87009413E4 /* Cart */,
 				B5C1C09025F151F5008C39AD /* Assets.xcassets */,
 				B5C1C09225F151F5008C39AD /* LaunchScreen.storyboard */,
 				B5C1C09525F151F5008C39AD /* Info.plist */,
@@ -187,6 +243,16 @@
 			path = BlackStarStoreUITests;
 			sourceTree = "<group>";
 		};
+		C41FFA4179E03D8D497C7891 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E847A2C1B2928B96B8736F2C /* Pods_BlackStarStore.framework */,
+				546238FB620E3DFDBE9CCB5B /* Pods_BlackStarStore_BlackStarStoreUITests.framework */,
+				908B2457BE3F6E4F518E57FC /* Pods_BlackStarStoreTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,9 +260,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5C1C0AE25F151F5008C39AD /* Build configuration list for PBXNativeTarget "BlackStarStore" */;
 			buildPhases = (
+				D882C95149D165054C804A19 /* [CP] Check Pods Manifest.lock */,
 				B5C1C08025F151F3008C39AD /* Sources */,
 				B5C1C08125F151F3008C39AD /* Frameworks */,
 				B5C1C08225F151F3008C39AD /* Resources */,
+				3B3791D4066B6F4B6CB454D1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,6 +279,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5C1C0B125F151F5008C39AD /* Build configuration list for PBXNativeTarget "BlackStarStoreTests" */;
 			buildPhases = (
+				230CECC808DD287B42AAC762 /* [CP] Check Pods Manifest.lock */,
 				B5C1C09625F151F5008C39AD /* Sources */,
 				B5C1C09725F151F5008C39AD /* Frameworks */,
 				B5C1C09825F151F5008C39AD /* Resources */,
@@ -229,9 +298,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5C1C0B425F151F5008C39AD /* Build configuration list for PBXNativeTarget "BlackStarStoreUITests" */;
 			buildPhases = (
+				250D76A1B6C43EA8C0D9B16A /* [CP] Check Pods Manifest.lock */,
 				B5C1C0A125F151F5008C39AD /* Sources */,
 				B5C1C0A225F151F5008C39AD /* Frameworks */,
 				B5C1C0A325F151F5008C39AD /* Resources */,
+				74907ED7BA53DA608042490B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -290,6 +361,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5AAF04C25F90A5F00EE367E /* ModalWindowViewController.xib in Resources */,
 				B5C1C09425F151F5008C39AD /* LaunchScreen.storyboard in Resources */,
 				B5C1C09125F151F5008C39AD /* Assets.xcassets in Resources */,
 				B5C1C08F25F151F3008C39AD /* Main.storyboard in Resources */,
@@ -312,6 +384,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		230CECC808DD287B42AAC762 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlackStarStoreTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		250D76A1B6C43EA8C0D9B16A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlackStarStore-BlackStarStoreUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3B3791D4066B6F4B6CB454D1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BlackStarStore/Pods-BlackStarStore-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BlackStarStore/Pods-BlackStarStore-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BlackStarStore/Pods-BlackStarStore-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		74907ED7BA53DA608042490B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BlackStarStore-BlackStarStoreUITests/Pods-BlackStarStore-BlackStarStoreUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BlackStarStore-BlackStarStoreUITests/Pods-BlackStarStore-BlackStarStoreUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BlackStarStore-BlackStarStoreUITests/Pods-BlackStarStore-BlackStarStoreUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D882C95149D165054C804A19 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlackStarStore-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B5C1C08025F151F3008C39AD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -319,16 +494,21 @@
 			files = (
 				B523756025F156AD00A65115 /* CategoryTableViewCell.swift in Sources */,
 				B5BAED1925F5017F00E70EC9 /* SubCategoryViewController.swift in Sources */,
+				B541135225F8FE9A00A0B0B8 /* ModalWindowViewController.swift in Sources */,
 				B523755B25F153AC00A65115 /* CategoryViewController.swift in Sources */,
 				B523756A25F1573000A65115 /* FetchDataFromJson.swift in Sources */,
 				B5C1C08825F151F3008C39AD /* AppDelegate.swift in Sources */,
 				B513930525F55DEF006CD4F8 /* Product.swift in Sources */,
+				B5F63ED525F8A1DE00D659FC /* ProductCollectionViewCell.swift in Sources */,
+				B595727F25FA4EA5009413E4 /* CartTableViewCell.swift in Sources */,
 				B59A4FE825F74B3B009FF253 /* ProductViewController.swift in Sources */,
 				B5C1C08A25F151F3008C39AD /* SceneDelegate.swift in Sources */,
 				B513930025F55983006CD4F8 /* ProductsListCollectionViewCell.swift in Sources */,
 				B51392F825F5590B006CD4F8 /* ProductsListViewController.swift in Sources */,
+				B595727625FA4E6A009413E4 /* CartViewController.swift in Sources */,
 				B523756525F156F500A65115 /* Category.swift in Sources */,
 				B5BAED1425F5014600E70EC9 /* SubCategoryTableViewCell.swift in Sources */,
+				B5AAF04725F9088600EE367E /* PresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +681,7 @@
 		};
 		B5C1C0AF25F151F5008C39AD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FE4F8A9E8018C07C1D4D6B4 /* Pods-BlackStarStore.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -520,6 +701,7 @@
 		};
 		B5C1C0B025F151F5008C39AD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 193D9AEF88BA447CFA776A9C /* Pods-BlackStarStore.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -539,6 +721,7 @@
 		};
 		B5C1C0B225F151F5008C39AD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE9E98863A45E278C108915C /* Pods-BlackStarStoreTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -561,6 +744,7 @@
 		};
 		B5C1C0B325F151F5008C39AD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F88A19025A119A3E88E72B6 /* Pods-BlackStarStoreTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -583,6 +767,7 @@
 		};
 		B5C1C0B525F151F5008C39AD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69870F8DB4690A9873DE2385 /* Pods-BlackStarStore-BlackStarStoreUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -603,6 +788,7 @@
 		};
 		B5C1C0B625F151F5008C39AD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEE062519A453E030EF098B3 /* Pods-BlackStarStore-BlackStarStoreUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

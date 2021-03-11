@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModalWindowViewController" customModule="BlackStarStore" customModuleProvider="target">
+            <connections>
+                <outlet property="addToCartButton" destination="rBP-ZW-6cO" id="hQt-Pd-Oid"/>
+                <outlet property="closeButton" destination="VGW-72-puk" id="N6J-Lt-cvA"/>
+                <outlet property="sizeAndColorPickerView" destination="i4D-8S-Bj7" id="DvF-Nh-uo6"/>
+                <outlet property="slideIndicator" destination="k3V-Xv-gAO" id="sbZ-vu-VKF"/>
+                <outlet property="view" destination="iN0-l3-epB" id="L8e-Ru-Qre"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="391"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3V-Xv-gAO">
+                    <rect key="frame" x="177" y="12" width="60" height="4"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="Cwk-8M-0pD"/>
+                        <constraint firstAttribute="height" constant="4" id="HX8-kf-YDh"/>
+                    </constraints>
+                </view>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4D-8S-Bj7">
+                    <rect key="frame" x="12" y="44" width="390" height="239"/>
+                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                </pickerView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGW-72-puk">
+                    <rect key="frame" x="352" y="8" width="46" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="HoJ-4G-OZC"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="closeButtonAction:" destination="-1" eventType="touchUpInside" id="ZxW-dF-ctr"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBP-ZW-6cO">
+                    <rect key="frame" x="12" y="307" width="390" height="48"/>
+                    <color key="backgroundColor" name="AccentColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="bqd-AC-nxm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="addToCartButtonAction:" destination="-1" eventType="touchUpInside" id="beR-nt-3Zl"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="i4D-8S-Bj7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="8Fj-A3-zcZ"/>
+                <constraint firstAttribute="trailing" secondItem="VGW-72-puk" secondAttribute="trailing" constant="16" id="CKK-Zv-MgK"/>
+                <constraint firstItem="rBP-ZW-6cO" firstAttribute="top" secondItem="i4D-8S-Bj7" secondAttribute="bottom" constant="24" id="HLN-gv-a3a"/>
+                <constraint firstItem="rBP-ZW-6cO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="LDv-ae-elt"/>
+                <constraint firstAttribute="trailing" secondItem="i4D-8S-Bj7" secondAttribute="trailing" constant="12" id="NWw-lm-rEE"/>
+                <constraint firstItem="VGW-72-puk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Ngv-S4-CSa"/>
+                <constraint firstItem="k3V-Xv-gAO" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="R6Y-Gu-2Sv"/>
+                <constraint firstAttribute="trailing" secondItem="rBP-ZW-6cO" secondAttribute="trailing" constant="12" id="UKV-uW-w2W"/>
+                <constraint firstItem="k3V-Xv-gAO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="qcC-qu-0cI"/>
+                <constraint firstItem="i4D-8S-Bj7" firstAttribute="top" secondItem="VGW-72-puk" secondAttribute="top" constant="36" id="vWi-E5-1ed"/>
+                <constraint firstItem="rBP-ZW-6cO" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" constant="-36" id="ym2-mt-11f"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="131.8840579710145" y="314.39732142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

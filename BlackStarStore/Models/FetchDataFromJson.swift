@@ -6,8 +6,15 @@
 //
 
 import Foundation
+import SVProgressHUD
+
+func setupPreloader() {
+    SVProgressHUD.setBackgroundColor(.systemGray5)
+}
 
 func loadCategories(completion: @escaping ([ShopCategory]) -> Void) {
+    setupPreloader()
+    SVProgressHUD.show(withStatus: "Загружаем категории")
     let apiURL = URL(string: "https://blackstarshop.ru/index.php?route=api/v1/categories")
     let session = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
         let decodedData = try! JSONDecoder().decode(ParsedJSON.self, from: data!)
@@ -17,13 +24,17 @@ func loadCategories(completion: @escaping ([ShopCategory]) -> Void) {
                 values.append(el.value)
             }
             completion(values)
+            SVProgressHUD.dismiss()
         }
     }
     session.resume()
 }
 
 func loadProducts(id: Int, completion: @escaping ([Product]) -> Void) {
+    setupPreloader()
+    SVProgressHUD.show(withStatus: "Загружаем товары")
     let url = "https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(id)"
+//    print("=================== \n \(id) \n ====================")
     let apiURL = URL(string: url)
     let session = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
         let decodedData = try! JSONDecoder().decode(ParsedProducts.self, from: data!)
@@ -31,10 +42,9 @@ func loadProducts(id: Int, completion: @escaping ([Product]) -> Void) {
         DispatchQueue.main.async {
             for (_, el) in decodedData.innerArray.enumerated() {
                 products.append(el.value)
-//                print(el.value)
             }
             completion(products)
-//            print(products)
+            SVProgressHUD.dismiss()
         }
     }
     session.resume()
