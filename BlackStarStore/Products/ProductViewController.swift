@@ -24,11 +24,18 @@ class ProductViewController: UIViewController {
     var productPrice: String?
     var productDescription: String?
     var productOffers: [Offers] = []
+    var productImageURL: String = ""
     
     @objc func openModal() {
         let modalVC = ModalWindowViewController()
+        
         modalVC.modalPresentationStyle = .custom
         modalVC.transitioningDelegate = self
+        
+        /* TRANSIT DATA FOR REALM*/
+        modalVC.productName = productName!
+        modalVC.productPrice = productPrice!
+        modalVC.productImage = productImageURL
         
         for i in productOffers {
             modalVC.sizes.append(i.size)

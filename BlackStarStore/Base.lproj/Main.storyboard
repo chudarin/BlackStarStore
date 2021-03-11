@@ -78,7 +78,13 @@
                             <constraint firstItem="rN7-if-z8S" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tdU-dq-1rP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Категории" id="aGV-Uz-lzH"/>
+                    <navigationItem key="navigationItem" title="Категории" id="aGV-Uz-lzH">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="cart.fill" catalog="system" id="w8T-kb-Tdk">
+                            <connections>
+                                <segue destination="lhu-cZ-FHS" kind="presentation" id="FqE-Bd-Up8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="categoryTable" destination="rN7-if-z8S" id="lXH-hj-BbF"/>
                     </connections>
@@ -469,12 +475,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qsm-38-Czw">
-                                <rect key="frame" x="0.0" y="56" width="414" height="608"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="qsm-38-Czw">
+                                <rect key="frame" x="0.0" y="24" width="414" height="640"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CartCell" id="bhi-QI-wez" customClass="CartTableViewCell" customModule="BlackStarStore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="96.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="96.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bhi-QI-wez" id="loe-F4-DEc">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="96.5"/>
@@ -531,9 +537,6 @@
                                                     </constraints>
                                                     <color key="tintColor" systemColor="systemGrayColor"/>
                                                     <state key="normal" image="trash.fill" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="deleteProductButton:" destination="lhu-cZ-FHS" eventType="touchUpInside" id="shu-s1-4lJ"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -557,6 +560,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="deleteButton" destination="aUa-zd-FMg" id="chh-JK-Hc0"/>
                                             <outlet property="productColorLabel" destination="Iib-h7-BRg" id="OB7-al-0al"/>
                                             <outlet property="productImageView" destination="tjI-1u-JT6" id="ses-HP-JNZ"/>
                                             <outlet property="productNameLabel" destination="Ugr-Qo-mSc" id="R3K-Yd-sj2"/>
@@ -610,7 +614,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAs-q1-6wa">
-                                <rect key="frame" x="370" y="12" width="32" height="32"/>
+                                <rect key="frame" x="372" y="12" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CAs-q1-6wa" secondAttribute="height" multiplier="1:1" id="d8S-vH-ypg"/>
                                 </constraints>
@@ -638,8 +642,7 @@
                             <constraint firstItem="ZVh-DF-p7E" firstAttribute="trailing" secondItem="FeA-mO-ivp" secondAttribute="trailing" constant="12" id="mSk-8e-Njj"/>
                             <constraint firstItem="1qT-Lk-6Bd" firstAttribute="firstBaseline" secondItem="UAR-b8-gro" secondAttribute="firstBaseline" id="ng5-ns-IJ5"/>
                             <constraint firstItem="CAs-q1-6wa" firstAttribute="top" secondItem="ZVh-DF-p7E" secondAttribute="top" constant="12" id="szm-bU-StH"/>
-                            <constraint firstItem="qsm-38-Czw" firstAttribute="top" secondItem="ZVh-DF-p7E" secondAttribute="top" constant="56" id="vun-65-YYS"/>
-                            <constraint firstItem="qsm-38-Czw" firstAttribute="top" secondItem="CAs-q1-6wa" secondAttribute="bottom" constant="12" id="wqc-dL-K8F"/>
+                            <constraint firstItem="qsm-38-Czw" firstAttribute="top" secondItem="ZVh-DF-p7E" secondAttribute="top" constant="24" id="vun-65-YYS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="t4C-2S-Z5g"/>
@@ -652,7 +655,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNY-g4-zgx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4085.507246376812" y="116.51785714285714"/>
+            <point key="canvasLocation" x="2132" y="-737"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gLw-FJ-paP">
@@ -673,6 +676,9 @@
             <point key="canvasLocation" x="131.8840579710145" y="116.51785714285714"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="FqE-Bd-Up8"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="cart.fill" catalog="system" width="128" height="102"/>
         <image name="trash.fill" catalog="system" width="121" height="128"/>

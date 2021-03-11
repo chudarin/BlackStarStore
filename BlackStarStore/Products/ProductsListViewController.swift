@@ -40,6 +40,7 @@ class ProductsListViewController: UIViewController {
                     vc.productGallery.append(i.imageURL)
                 }
                 vc.productOffers = products[indexPath.row].offers
+                vc.productImageURL = "https://blackstarshop.ru/\(products[indexPath.row].mainImage)"
             }
         }
     }

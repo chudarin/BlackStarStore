@@ -41,4 +41,7 @@ extension SubCategoryViewController: UITableViewDelegate, UITableViewDataSource 
         cell.subCategoryImageView.image = subCategories[indexPath.row].iconImage != "" ? UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(subCategories[indexPath.row].iconImage)")!)) : UIImage(named: "no_image")
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

@@ -12,7 +12,8 @@ class ModalWindowViewController: UIViewController {
     @IBOutlet weak var slideIndicator: UIView!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBAction func addToCartButtonAction(_ sender: Any) {
-        print("Added to Cart")
+        addProductToCartRealm(imageURL: productImage, name: productName, size: sizes[selectedSize], color: colors[selectedColor], price: productPrice)
+        dismiss(animated: true, completion: nil)
     }
     @IBOutlet weak var sizeAndColorPickerView: UIPickerView!
     @IBOutlet weak var closeButton: UIButton!
@@ -20,11 +21,17 @@ class ModalWindowViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    /* PASS THE DATA FOR REALM*/
+    var productImage: String = ""
+    var productName: String = ""
+    var productPrice: String = ""
+    
     var hasSetPointOrigin = false
     var pointOrigin: CGPoint?
     var colors = ["Red", "Blue", "Green", "Black", "White", "Yellow", "Brown", "Orange", "Violet"]
     var sizes: [String] = []
-    
+    var selectedSize: Int = 0
+    var selectedColor: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +96,15 @@ extension ModalWindowViewController: UIPickerViewDelegate, UIPickerViewDataSourc
             return colors[row]
         } else {
             return sizes[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent  component: Int) {
+//        let yearValueSelected = pickerData[row] as String
+        if component == 0 {
+            selectedColor = row
+        } else {
+            selectedSize = row
         }
     }
 }

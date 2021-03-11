@@ -8,38 +8,47 @@
 import Foundation
 import RealmSwift
 
+let realm = try! Realm()
+let products = realm.objects(ProductInCart.self)
 
-@objc dynamic var productImageView: UIImageView!
-productNameLabel: UILabel!
-productSizeLabel: UILabel!
-productColorLabel: UILabel!
-productPriceLabel: UILabel!
-
-// Define your models like regular Swift classes
-class Dog: Object {
-    @objc dynamic var name = ""
-    @objc dynamic var age = 0
-}
-class Person: Object {
-    @objc dynamic var _id = ""
-    @objc dynamic var name = ""
-    @objc dynamic var age = 0
-    // Create relationships by pointing an Object field to another Class
-    let dogs = List<Dog>()
+class ProductInCart: Object {
+    @objc dynamic var productImageURL: String = ""
+    @objc dynamic var productName: String = ""
+    @objc dynamic var productSize: String = ""
+    @objc dynamic var productColor: String = ""
+    @objc dynamic var productPrice: String = ""
     
-    override static func primaryKey() -> String? {
-        return "_id"
+    convenience init(imageURL: String, name: String, size: String, color: String, price: String) {
+        self.init()
+        self.productImageURL = imageURL
+        self.productName = name
+        self.productSize = size
+        self.productColor = color
+        self.productPrice = price
     }
 }
-// Use them like regular Swift objects
-let dog = Dog()
-dog.name = "Rex"
-dog.age = 1
-print("name of dog: \(dog.name)")
 
-// Get the default Realm
-let realm = try! Realm()
-// Persist your data easily with a write transaction
-try! realm.write {
-    realm.add(dog)
+func addProductToCartRealm(imageURL: String, name: String, size: String, color: String, price: String) {
+    try! realm.write { realm.add(ProductInCart(imageURL: imageURL, name: name, size: size, color: color, price: price)) }
+}
+
+func getProductToCartRealm() -> [ProductInCart] {
+    var arr: [ProductInCart] = []
+    for i in products {
+        arr.append(i)
+    }
+    return arr
+}
+
+func deleteProductToCartRealm(product number: Int) {
+    try! realm.write {
+        realm.delete(products[number])
+    }
+}
+
+func deleteALLProducts() {
+    try! realm.write {
+        realm.deleteAll()
+        print("================== \n DATABASE DROPPED \n ==================")
+    }
 }
