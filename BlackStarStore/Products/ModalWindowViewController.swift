@@ -21,7 +21,7 @@ class ModalWindowViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    /* PASS THE DATA FOR REALM*/
+    /* PASS THE DATA FOR REALM */
     var productImage: String = ""
     var productName: String = ""
     var productPrice: String = ""
@@ -33,8 +33,8 @@ class ModalWindowViewController: UIViewController {
     var selectedSize: Int = 0
     var selectedColor: Int = 0
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // MARK: - Setup Modal Frame
+    func setupModalFrame() {
         sizeAndColorPickerView.delegate = self
         sizeAndColorPickerView.dataSource = self
         sizeAndColorPickerView.backgroundColor = .systemGray6
@@ -46,6 +46,12 @@ class ModalWindowViewController: UIViewController {
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerAction))
         view.addGestureRecognizer(panGesture)
+    }
+    
+    // MARK: - viewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupModalFrame()
     }
     
     override func viewDidLayoutSubviews() {
@@ -78,6 +84,7 @@ class ModalWindowViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension ModalWindowViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
@@ -100,7 +107,6 @@ extension ModalWindowViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent  component: Int) {
-//        let yearValueSelected = pickerData[row] as String
         if component == 0 {
             selectedColor = row
         } else {

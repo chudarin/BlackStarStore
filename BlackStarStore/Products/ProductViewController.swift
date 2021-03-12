@@ -26,13 +26,14 @@ class ProductViewController: UIViewController {
     var productOffers: [Offers] = []
     var productImageURL: String = ""
     
+    // MARK: - Open Modal Func
     @objc func openModal() {
         let modalVC = ModalWindowViewController()
         
         modalVC.modalPresentationStyle = .custom
         modalVC.transitioningDelegate = self
         
-        /* TRANSIT DATA FOR REALM*/
+        /* TRANSIT DATA FOR REALM */
         modalVC.productName = productName!
         modalVC.productPrice = productPrice!
         modalVC.productImage = productImageURL
@@ -44,6 +45,7 @@ class ProductViewController: UIViewController {
         self.present(modalVC, animated: true, completion: nil)
     }
     
+    // MARK: - Setup Product Frame
     func setupProductFrame() {
         addToCartButton.frame.size.height = 48
         addToCartButton.layer.cornerRadius = addToCartButton.frame.height / 4
@@ -53,7 +55,7 @@ class ProductViewController: UIViewController {
         productNameLabel.minimumScaleFactor = 0.2
         productNameLabel.text = productName ?? "Не указано"
         
-        productPriceLabel.text = ProductsListViewController().convertToPrice(productPrice ?? "Не указано")
+        productPriceLabel.text = convertToPrice(productPrice ?? "Не указано")
         
         productDescriptionTextView.sizeToFit()
         productDescriptionTextView.isScrollEnabled = false
@@ -64,14 +66,34 @@ class ProductViewController: UIViewController {
         productGalleryControl.currentPage = 0
     }
     
+    // MARK: - Cart Button
+    @objc func openCart() {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let secondVc = storyboard.instantiateViewController(withIdentifier: "Cart") as! CartViewController
+        present(secondVc, animated: true, completion: nil)
+    }
+    
+    public func cartButton() {
+        let cartButton = UIButton(type: .custom)
+        cartButton.setImage(UIImage(systemName: "cart.fill"), for: .normal)
+        cartButton.addTarget(self, action: #selector(openCart), for: .touchUpInside)
+        cartButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        let barButton = UIBarButtonItem(customView: cartButton)
+        self.navigationItem.rightBarButtonItem = barButton
+        barButton.setup()
+        barButton.setBadge(with: getProductToCartRealm().count)
+    }
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
         setupProductFrame()
         self.productGalleryCollectionView.reloadData()
-        super.viewDidLoad()
+        cartButton()
     }
 }
 
+// MARK: - Extensions
 extension ProductViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productGallery.count

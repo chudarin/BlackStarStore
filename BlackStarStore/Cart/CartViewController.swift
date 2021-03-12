@@ -6,11 +6,8 @@
 //
 
 import UIKit
-import RealmSwift
 
 class CartViewController: UIViewController {
-    
-    let realm = try! Realm()
     
     @IBOutlet weak var closeCartButton: UIButton!
     @IBAction func closeCartButtonAction(_ sender: Any) {
@@ -21,8 +18,7 @@ class CartViewController: UIViewController {
     @IBOutlet weak var checkoutButton: UIButton!
     @IBAction func checkoutButtonAction(_ sender: Any) {
     }
-    
-    
+        
     var productsInCart: [ProductInCart] = []
     
     func calculateSumOfProducts() -> String {
@@ -33,14 +29,13 @@ class CartViewController: UIViewController {
         return String(sum)
     }
     
-    
-    
+    // MARK: - Setup Yes/No Alert
     @objc func deleteAlert(sender: UIButton) {
         let alert = UIAlertController(title: "Внимание", message: "Удалить товар из корзины?", preferredStyle: .alert)
         let number = sender.tag
         alert.addAction(UIAlertAction(title: "Да", style: .default, handler: { action in
             deleteProductToCartRealm(product: number)
-            self.prepareView()
+            self.setupCartFrame()
             self.cartTableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Нет", style: .cancel, handler: nil))
@@ -48,22 +43,22 @@ class CartViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    fileprivate func prepareView() {
+    // MARK: - Setup Cart Frame
+    func setupCartFrame() {
         productsInCart = getProductToCartRealm()
-        sumPriceLabel.text = ProductsListViewController().convertToPrice(calculateSumOfProducts())
+        sumPriceLabel.text = convertToPrice(calculateSumOfProducts())
         cartTableView.reloadData()
     }
     
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         checkoutButton.layer.cornerRadius = 8
-        
-        prepareView()
+        setupCartFrame()
     }
 }
 
-
+// MARK: - Extensions
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return productsInCart.count
@@ -76,7 +71,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         cell.productSizeLabel.text = "Размер: \(productsInCart[indexPath.row].productSize)"
         cell.productColorLabel.text = "Цвет: \(productsInCart[indexPath.row].productColor)"
         cell.productImageView.image = productsInCart[indexPath.row].productImageURL != "" ? UIImage(data: try! Data(contentsOf: URL(string: productsInCart[indexPath.row].productImageURL )!)) : UIImage(named: "no_image")
-        cell.productPriceLabel.text = ProductsListViewController().convertToPrice(productsInCart[indexPath.row].productPrice)
+        cell.productPriceLabel.text = convertToPrice(productsInCart[indexPath.row].productPrice)
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteAlert), for: .touchUpInside)
         

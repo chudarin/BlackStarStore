@@ -52,3 +52,11 @@ struct Offers: Codable {
     let size: String
     let quantity: String
 }
+
+public func convertToPrice(_ price: String) -> String {
+    let value = (price as NSString).doubleValue
+    let formatter = NumberFormatter()
+    formatter.usesGroupingSeparator = true
+    formatter.numberStyle = .none
+    return formatter.string(from: NSNumber(value: value))! + " ₽"
+}

@@ -20,16 +20,9 @@ class ProductsListViewController: UIViewController {
         case .integer(let i): return i
         case .string(let s): return Int(s)!
         }
-    }
+    }    
     
-    func convertToPrice(_ price: String) -> String {
-        let value = (price as NSString).doubleValue
-        let formatter = NumberFormatter()
-        formatter.usesGroupingSeparator = true
-        formatter.numberStyle = .none
-        return formatter.string(from: NSNumber(value: value))! + " ₽"
-    }
-    
+    // MARK: - Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ProductViewController, segue.identifier == "openProductPage" {
             if let cell = sender as? UICollectionViewCell, let indexPath = productsCollectionView.indexPath(for: cell) {
@@ -45,17 +38,38 @@ class ProductsListViewController: UIViewController {
         }
     }
     
+    // MARK: - Cart Button
+    @objc func openCart() {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let secondVc = storyboard.instantiateViewController(withIdentifier: "Cart") as! CartViewController
+        present(secondVc, animated: true, completion: nil)
+    }
+    
+    public func cartButton() {
+        let cartButton = UIButton(type: .custom)
+        cartButton.setImage(UIImage(systemName: "cart.fill"), for: .normal)
+        cartButton.addTarget(self, action: #selector(openCart), for: .touchUpInside)
+        cartButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        let barButton = UIBarButtonItem(customView: cartButton)
+        self.navigationItem.rightBarButtonItem = barButton
+        barButton.setup()
+        barButton.setBadge(with: getProductToCartRealm().count)
+    }
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
+        super.viewDidLoad()
         loadProducts(id: decodeProductsID(id: productsID!)) { (parsedProducts) in
             self.products = parsedProducts
             self.productsCollectionView.reloadData()
         }
         self.title = productsTitle
-        super.viewDidLoad()
+        cartButton()
     }
     
 }
 
+// MARK: - Extensions
 extension ProductsListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

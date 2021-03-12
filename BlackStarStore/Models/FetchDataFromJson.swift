@@ -34,7 +34,6 @@ func loadProducts(id: Int, completion: @escaping ([Product]) -> Void) {
     setupPreloader()
     SVProgressHUD.show(withStatus: "Загружаем товары")
     let url = "https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(id)"
-//    print("=================== \n \(id) \n ====================")
     let apiURL = URL(string: url)
     let session = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
         let decodedData = try! JSONDecoder().decode(ParsedProducts.self, from: data!)
