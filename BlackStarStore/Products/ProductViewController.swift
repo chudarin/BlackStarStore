@@ -64,6 +64,8 @@ class ProductViewController: UIViewController {
         productGalleryControl.numberOfPages = productGallery.count
         productGalleryControl.isHidden = !(productGallery.count > 1)
         productGalleryControl.currentPage = 0
+        
+        cartButton()
     }
     
     // MARK: - Cart Button
@@ -89,7 +91,6 @@ class ProductViewController: UIViewController {
         super.viewDidLoad()
         setupProductFrame()
         self.productGalleryCollectionView.reloadData()
-        cartButton()
     }
 }
 

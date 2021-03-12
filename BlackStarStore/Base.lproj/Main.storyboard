@@ -182,7 +182,7 @@
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Product" id="QVL-g0-OoQ" customClass="ProductsListCollectionViewCell" customModule="BlackStarStore" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="168" height="238.5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="w7K-hm-oCO">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="238.5"/>
                                             <autoresizingMask key="autoresizingMask"/>

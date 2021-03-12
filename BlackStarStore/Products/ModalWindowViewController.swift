@@ -43,7 +43,6 @@ class ModalWindowViewController: UIViewController {
         sizeAndColorPickerView.layer.cornerRadius = 8
         addToCartButton.layer.cornerRadius = 8
         slideIndicator.layer.cornerRadius = 2
-        
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerAction))
         view.addGestureRecognizer(panGesture)
     }
