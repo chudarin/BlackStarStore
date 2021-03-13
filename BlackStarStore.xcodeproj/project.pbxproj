@@ -23,8 +23,6 @@
 		B59A4FE825F74B3B009FF253 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A4FE725F74B3B009FF253 /* ProductViewController.swift */; };
 		B5AAF04725F9088600EE367E /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AAF04625F9088600EE367E /* PresentationController.swift */; };
 		B5AAF04C25F90A5F00EE367E /* ModalWindowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AAF04B25F90A5F00EE367E /* ModalWindowViewController.xib */; };
-		B5BAED1425F5014600E70EC9 /* SubCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAED1325F5014500E70EC9 /* SubCategoryTableViewCell.swift */; };
-		B5BAED1925F5017F00E70EC9 /* SubCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAED1825F5017F00E70EC9 /* SubCategoryViewController.swift */; };
 		B5C1C08825F151F3008C39AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1C08725F151F3008C39AD /* AppDelegate.swift */; };
 		B5C1C08A25F151F3008C39AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1C08925F151F3008C39AD /* SceneDelegate.swift */; };
 		B5C1C08F25F151F3008C39AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C1C08D25F151F3008C39AD /* Main.storyboard */; };
@@ -75,8 +73,6 @@
 		B59A4FE725F74B3B009FF253 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		B5AAF04625F9088600EE367E /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		B5AAF04B25F90A5F00EE367E /* ModalWindowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalWindowViewController.xib; sourceTree = "<group>"; };
-		B5BAED1325F5014500E70EC9 /* SubCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryTableViewCell.swift; sourceTree = "<group>"; };
-		B5BAED1825F5017F00E70EC9 /* SubCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryViewController.swift; sourceTree = "<group>"; };
 		B5C1C08425F151F3008C39AD /* BlackStarStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackStarStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C1C08725F151F3008C39AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5C1C08925F151F3008C39AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -159,15 +155,6 @@
 			path = Products;
 			sourceTree = "<group>";
 		};
-		B59A4FDB25F74AF0009FF253 /* Sub Category */ = {
-			isa = PBXGroup;
-			children = (
-				B5BAED1825F5017F00E70EC9 /* SubCategoryViewController.swift */,
-				B5BAED1325F5014500E70EC9 /* SubCategoryTableViewCell.swift */,
-			);
-			path = "Sub Category";
-			sourceTree = "<group>";
-		};
 		B59A4FDF25F74AF8009FF253 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,7 +205,6 @@
 				B5C1C08D25F151F3008C39AD /* Main.storyboard */,
 				B59A4FE325F74B00009FF253 /* Models */,
 				B59A4FDF25F74AF8009FF253 /* Category */,
-				B59A4FDB25F74AF0009FF253 /* Sub Category */,
 				B59A4FD725F74AE7009FF253 /* Products */,
 				B595727A25FA4E87009413E4 /* Cart */,
 				B5C1C09025F151F5008C39AD /* Assets.xcassets */,
@@ -496,7 +482,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B523756025F156AD00A65115 /* CategoryTableViewCell.swift in Sources */,
-				B5BAED1925F5017F00E70EC9 /* SubCategoryViewController.swift in Sources */,
 				B541135225F8FE9A00A0B0B8 /* ModalWindowViewController.swift in Sources */,
 				B523755B25F153AC00A65115 /* CategoryViewController.swift in Sources */,
 				B523756A25F1573000A65115 /* FetchDataFromJson.swift in Sources */,
@@ -510,7 +495,6 @@
 				B51392F825F5590B006CD4F8 /* ProductsListViewController.swift in Sources */,
 				B595727625FA4E6A009413E4 /* CartViewController.swift in Sources */,
 				B523756525F156F500A65115 /* Category.swift in Sources */,
-				B5BAED1425F5014600E70EC9 /* SubCategoryTableViewCell.swift in Sources */,
 				B5AAF04725F9088600EE367E /* PresentationController.swift in Sources */,
 				B595729025FA52C4009413E4 /* Realm.swift in Sources */,
 			);
