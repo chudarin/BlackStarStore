@@ -12,16 +12,18 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var categoryTable: UITableView!
     
     var categories: [ShopCategory] = []
+    var subCategories: [ShopSubcategory] = []
+    var currentView: UIViewController = CategoryViewController()
     
     // MARK: - Prepare for Segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? SubCategoryViewController, segue.identifier == "openSubCategory" {
-            if let cell = sender as? UITableViewCell, let indexPath = categoryTable.indexPath(for: cell) {
-                vc.subCategories = categories[indexPath.row].subcategories
-                vc.subCategoryTitle = categories[indexPath.row].name
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let vc = segue.destination as? SubCategoryViewController {
+//            if let cell = sender as? UITableViewCell, let indexPath = categoryTable.indexPath(for: cell) {
+//                vc.subCategories = categories[indexPath.row].subcategories
+//                vc.subCategoryTitle = categories[indexPath.row].name
+//            }
+//        }
+//    }
     
     // MARK: - Cart Button
     @objc func openCart() {
@@ -30,7 +32,7 @@ class CategoryViewController: UIViewController {
         present(secondVc, animated: true, completion: nil)
     }
     
-    public func cartButton() {
+    public func addCartButton() {
         let cartButton = UIButton(type: .custom)
         cartButton.setImage(UIImage(systemName: "cart.fill"), for: .normal)
         cartButton.addTarget(self, action: #selector(openCart), for: .touchUpInside)
@@ -40,16 +42,24 @@ class CategoryViewController: UIViewController {
         barButton.setup()
         barButton.setBadge(with: getProductToCartRealm().count)
     }
+
+    // MARK: - Preparing Categories
+    func prepareCategories() {
+        loadCategories { (category) in
+            self.categories = category
+            for i in category {
+                self.subCategories = i.subcategories
+            }
+            self.categoryTable.reloadData()
+        }
+    }
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadCategories { (category) in
-            self.categories = category
-            self.categoryTable.reloadData()
-        }
+        prepareCategories()
 //        deleteALLProducts()
-        cartButton()
+        addCartButton()
     }
 }
 
@@ -66,8 +76,13 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         cell.categoryImageView.image = categories[indexPath.row].image != "" ? UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(categories[indexPath.row].image)")!)) : UIImage(named: "no_image")
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc = storyboard?.instantiateViewController(identifier: "CategoryVC") as! CategoryViewController
+        vc.viewDidLoad()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -13,7 +13,7 @@
         <!--Категории-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CategoryViewController" customModule="BlackStarStore" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryVC" id="BYZ-38-t0r" customClass="CategoryViewController" customModule="BlackStarStore" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,7 +59,6 @@
                                         <connections>
                                             <outlet property="categoryImageView" destination="ZKP-se-WYn" id="GUA-Mc-DHB"/>
                                             <outlet property="categoryNameLabel" destination="dNx-K0-xTD" id="Uff-Me-YhC"/>
-                                            <segue destination="hf9-DL-0rb" kind="show" identifier="openSubCategory" id="uXn-2L-XGf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -87,81 +86,6 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="116.51785714285714"/>
         </scene>
-        <!--Sub Category View Controller-->
-        <scene sceneID="RBe-wf-TRh">
-            <objects>
-                <viewController id="hf9-DL-0rb" customClass="SubCategoryViewController" customModule="BlackStarStore" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Jwo-yW-ftt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ovO-2d-jhP">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="subCategoryCell" id="ymJ-1j-Lt1" customClass="SubCategoryTableViewCell" customModule="BlackStarStore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ymJ-1j-Lt1" id="3ph-iB-MRx">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="80"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gad-cr-ett">
-                                                    <rect key="frame" x="12" y="12" width="56" height="56"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="56" id="fGJ-S4-JDQ"/>
-                                                        <constraint firstAttribute="width" constant="56" id="k4J-il-GwI"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="%SubCategory name%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHw-YN-r1A">
-                                                    <rect key="frame" x="84" y="32" width="275" height="16"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="Qif-ne-zsW"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="SHw-YN-r1A" firstAttribute="centerY" secondItem="3ph-iB-MRx" secondAttribute="centerY" id="2cS-Wz-wyC"/>
-                                                <constraint firstItem="Gad-cr-ett" firstAttribute="top" secondItem="3ph-iB-MRx" secondAttribute="top" constant="12" id="2yb-I5-OKw"/>
-                                                <constraint firstItem="Gad-cr-ett" firstAttribute="leading" secondItem="3ph-iB-MRx" secondAttribute="leading" constant="12" id="Bjq-QD-Lfp"/>
-                                                <constraint firstItem="SHw-YN-r1A" firstAttribute="leading" secondItem="Gad-cr-ett" secondAttribute="trailing" constant="16" id="MOA-gu-Til"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="SHw-YN-r1A" secondAttribute="trailing" constant="16" id="Tp3-R0-XrS"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="subCategoryImageView" destination="Gad-cr-ett" id="14E-uf-ioa"/>
-                                            <outlet property="subCategoryNameLabel" destination="SHw-YN-r1A" id="fZT-3v-x7s"/>
-                                            <segue destination="CZ3-RK-6sh" kind="show" identifier="openProducts" id="7Km-DC-yUw"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="hf9-DL-0rb" id="Fee-2s-wxH"/>
-                                    <outlet property="delegate" destination="hf9-DL-0rb" id="4BP-QX-b5b"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="iau-Ia-w2X"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="ovO-2d-jhP" firstAttribute="top" secondItem="iau-Ia-w2X" secondAttribute="top" id="35S-8v-cki"/>
-                            <constraint firstItem="ovO-2d-jhP" firstAttribute="leading" secondItem="iau-Ia-w2X" secondAttribute="leading" id="e5d-6T-fbh"/>
-                            <constraint firstItem="iau-Ia-w2X" firstAttribute="bottom" secondItem="ovO-2d-jhP" secondAttribute="bottom" id="lsC-wv-ybI"/>
-                            <constraint firstItem="iau-Ia-w2X" firstAttribute="trailing" secondItem="ovO-2d-jhP" secondAttribute="trailing" id="wrW-r3-W8X"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="hwH-cQ-hiE"/>
-                    <connections>
-                        <outlet property="subCategoryTable" destination="ovO-2d-jhP" id="2gF-1X-D2y"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0MD-Ii-0cB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1771" y="117"/>
-        </scene>
         <!--Products List View Controller-->
         <scene sceneID="9To-ao-VNE">
             <objects>
@@ -171,7 +95,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="N0K-FP-IDn">
-                                <rect key="frame" x="16" y="104" width="382" height="742"/>
+                                <rect key="frame" x="16" y="60" width="382" height="786"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="5" id="cdT-T3-rBm">
                                     <size key="itemSize" width="128" height="128"/>
@@ -276,7 +200,7 @@
             <objects>
                 <viewController id="JhG-lH-03U" customClass="ProductViewController" customModule="BlackStarStore" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mx9-Yg-C1P">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qpN-q7-IcM">
