@@ -11,12 +11,14 @@ import RealmSwift
 let realm = try! Realm()
 let products = realm.objects(ProductInCart.self)
 
+
 class ProductInCart: Object {
     @objc dynamic var productImageURL: String = ""
     @objc dynamic var productName: String = ""
     @objc dynamic var productSize: String = ""
     @objc dynamic var productColor: String = ""
     @objc dynamic var productPrice: String = ""
+    @objc dynamic var productQuantity: Int = 1
     
     convenience init(imageURL: String, name: String, size: String, color: String, price: String) {
         self.init()
@@ -25,11 +27,20 @@ class ProductInCart: Object {
         self.productSize = size
         self.productColor = color
         self.productPrice = price
+        self.productQuantity = 1
     }
 }
 
 func addProductToCartRealm(imageURL: String, name: String, size: String, color: String, price: String) {
-    try! realm.write { realm.add(ProductInCart(imageURL: imageURL, name: name, size: size, color: color, price: price)) }
+    if let existingProduct = products.filter("productName == %@ AND productColor == %@ AND productSize == %@", name, color, size).first {
+        try! realm.write {
+            existingProduct.productQuantity += 1
+        }
+    } else {
+        try! realm.write {
+            realm.add(ProductInCart(imageURL: imageURL, name: name, size: size, color: color, price: price))
+        }
+    }
 }
 
 func getProductToCartRealm() -> [ProductInCart] {

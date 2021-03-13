@@ -24,7 +24,7 @@ class CartViewController: UIViewController {
     func calculateSumOfProducts() -> String {
         var sum: Double = 0
         for i in productsInCart {
-            sum += Double(i.productPrice) ?? 0
+            sum += calculateMultiQuantity(price: i.productPrice, quantity: i.productQuantity)
         }
         return String(sum)
     }
@@ -50,6 +50,11 @@ class CartViewController: UIViewController {
         cartTableView.reloadData()
     }
     
+    func calculateMultiQuantity(price: String, quantity: Int) -> Double {
+        let value = (price as NSString).doubleValue
+        return value * Double(quantity)
+    }
+    
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,12 +71,17 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cartTableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath) as! CartTableViewCell
+        let product = productsInCart[indexPath.row]
         cell.productImageView.contentMode = .scaleAspectFill
-        cell.productNameLabel.text = productsInCart[indexPath.row].productName
-        cell.productSizeLabel.text = "Размер: \(productsInCart[indexPath.row].productSize)"
-        cell.productColorLabel.text = "Цвет: \(productsInCart[indexPath.row].productColor)"
-        cell.productImageView.image = productsInCart[indexPath.row].productImageURL != "" ? UIImage(data: try! Data(contentsOf: URL(string: productsInCart[indexPath.row].productImageURL )!)) : UIImage(named: "no_image")
-        cell.productPriceLabel.text = convertToPrice(productsInCart[indexPath.row].productPrice)
+        cell.productNameLabel.text = product.productName
+        cell.productSizeLabel.text = "Размер: \(product.productSize)"
+        cell.productColorLabel.text = "Цвет: \(product.productColor)"
+        cell.productImageView.image = product.productImageURL != "" ? UIImage(data: try! Data(contentsOf: URL(string: product.productImageURL )!)) : UIImage(named: "no_image")
+        if product.productQuantity > 0 {
+            cell.productPriceLabel.text = "\(product.productQuantity) x \(convertToPrice(product.productPrice))"
+        } else {
+            cell.productPriceLabel.text = convertToPrice(product.productPrice)
+        }        
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteAlert), for: .touchUpInside)
         

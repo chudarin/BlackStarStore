@@ -48,6 +48,7 @@ class CategoryViewController: UIViewController {
             self.categories = category
             self.categoryTable.reloadData()
         }
+//        deleteALLProducts()
         cartButton()
     }
 }
