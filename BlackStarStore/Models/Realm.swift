@@ -51,6 +51,14 @@ func getProductToCartRealm() -> [ProductInCart] {
     return arr
 }
 
+func getCountOfProducts() -> Int {
+    var sum = 0
+    for i in products {
+        sum += i.productQuantity
+    }
+    return sum
+}
+
 func deleteProductToCartRealm(product number: Int) {
     try! realm.write {
         realm.delete(products[number])

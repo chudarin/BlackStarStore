@@ -32,6 +32,7 @@ class ModalWindowViewController: UIViewController {
     var sizes: [String] = []
     var selectedSize: Int = 0
     var selectedColor: Int = 0
+    
 
     // MARK: - Setup Modal Frame
     func setupModalFrame() {

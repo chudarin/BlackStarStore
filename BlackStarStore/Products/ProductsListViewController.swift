@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ProductsListViewController: UIViewController {
+    
+    var notificationToken: NotificationToken? = nil
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
@@ -20,7 +23,24 @@ class ProductsListViewController: UIViewController {
         case .integer(let i): return i
         case .string(let s): return Int(s)!
         }
-    }    
+    }
+    
+    @objc func openCart() {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let secondVc = storyboard.instantiateViewController(withIdentifier: "Cart") as! CartViewController
+        present(secondVc, animated: true, completion: nil)
+    }
+    
+    func addCartButton() {
+        let cartButton = UIButton(type: .custom)
+        cartButton.setImage(UIImage(systemName: "cart.fill"), for: .normal)
+        cartButton.addTarget(self, action: #selector(openCart), for: .touchUpInside)
+        cartButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        let barButton = UIBarButtonItem(customView: cartButton)
+        self.navigationItem.rightBarButtonItem = barButton
+        barButton.setup()
+        barButton.setBadge(with: getCountOfProducts())
+    }
     
     // MARK: - Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -38,24 +58,6 @@ class ProductsListViewController: UIViewController {
         }
     }
     
-    // MARK: - Cart Button
-    @objc func openCart() {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let secondVc = storyboard.instantiateViewController(withIdentifier: "Cart") as! CartViewController
-        present(secondVc, animated: true, completion: nil)
-    }
-    
-    public func cartButton() {
-        let cartButton = UIButton(type: .custom)
-        cartButton.setImage(UIImage(systemName: "cart.fill"), for: .normal)
-        cartButton.addTarget(self, action: #selector(openCart), for: .touchUpInside)
-        cartButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        let barButton = UIBarButtonItem(customView: cartButton)
-        self.navigationItem.rightBarButtonItem = barButton
-        barButton.setup()
-        barButton.setBadge(with: getProductToCartRealm().count)
-    }
-    
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +66,29 @@ class ProductsListViewController: UIViewController {
             self.productsCollectionView.reloadData()
         }
         self.title = productsTitle
-        cartButton()
+        addCartButton()
+        
+        let realm = try! Realm()
+        let results = realm.objects(ProductInCart.self)
+        
+        // Observe Results Notifications
+        notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                self?.navigationItem.rightBarButtonItem?.setBadge(with: getCountOfProducts())
+            case .update(_,  _, _, _):
+                // Query results have changed, so apply them to the UITableView
+                self?.navigationItem.rightBarButtonItem?.setBadge(with: getCountOfProducts())
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
+    }
+    
+    deinit {
+        notificationToken?.invalidate()
     }
     
 }
@@ -81,8 +105,8 @@ extension ProductsListViewController: UICollectionViewDelegate, UICollectionView
         
         let product = products[indexPath.row]
         cell.productImageView.contentMode = .scaleAspectFill
-        cell.productNameLabel.text = product.name
-        cell.productDescriptionLabel.text = product.description
+        cell.productNameLabel.text = product.name.withoutHtml
+        cell.productDescriptionLabel.text = product.description.withoutHtml
         cell.productImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(product.mainImage)", contentMode: .scaleAspectFill)
         cell.productPriceLabel.text = convertToPrice(product.price)
         

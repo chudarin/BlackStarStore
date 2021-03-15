@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class CategoryViewController: UIViewController {
+    
+    var notificationToken: NotificationToken? = nil
 
     @IBOutlet weak var categoryTable: UITableView!
 
@@ -32,7 +35,7 @@ class CategoryViewController: UIViewController {
         present(secondVc, animated: true, completion: nil)
     }
     
-    public func addCartButton() {
+    func addCartButton() {
         let cartButton = UIButton(type: .custom)
         cartButton.setImage(UIImage(systemName: "cart.fill"), for: .normal)
         cartButton.addTarget(self, action: #selector(openCart), for: .touchUpInside)
@@ -40,7 +43,7 @@ class CategoryViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: cartButton)
         self.navigationItem.rightBarButtonItem = barButton
         barButton.setup()
-        barButton.setBadge(with: getProductToCartRealm().count)
+        barButton.setBadge(with: getCountOfProducts())
     }
 
     // Check for empty pages
@@ -73,6 +76,28 @@ class CategoryViewController: UIViewController {
         }
         self.title = currentTitle
         addCartButton()
+        
+        let realm = try! Realm()
+        let results = realm.objects(ProductInCart.self)
+        
+        // Observe Results Notifications
+        notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                self?.navigationItem.rightBarButtonItem?.setBadge(with: getCountOfProducts())
+            case .update(_,  _, _, _):
+                // Query results have changed, so apply them to the UITableView
+                self?.navigationItem.rightBarButtonItem?.setBadge(with: getCountOfProducts())
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
+    }
+    
+    deinit {
+        notificationToken?.invalidate()
     }
 }
 
@@ -91,7 +116,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
         if isRootCategory {
             let category = categories[indexPath.row]
-            cell.categoryNameLabel.text = category.name
+            cell.categoryNameLabel.text = category.name.withoutHtml
             if category.image != "" {
                 cell.categoryImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(category.image)", contentMode: .scaleAspectFit)
             } else {
@@ -100,7 +125,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let category = subCategories[indexPath.row]
             cell.categoryImageView.layer.cornerRadius = 5
-            cell.categoryNameLabel.text = category.name
+            cell.categoryNameLabel.text = category.name.withoutHtml
             if category.iconImage != "" {
                 cell.categoryImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(category.iconImage)", contentMode: .scaleAspectFit)
             } else {
@@ -117,14 +142,14 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         
         if isRootCategory {
             let vc = storyboard?.instantiateViewController(identifier: "CategoryVC") as! CategoryViewController
-            vc.currentTitle = categories[indexPath.row].name
+            vc.currentTitle = categories[indexPath.row].name.withoutHtml
             vc.subCategories = categories[indexPath.row].subcategories
             vc.isRootCategory = false
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let vc = storyboard?.instantiateViewController(identifier: "ProductsListVC") as! ProductsListViewController
             vc.productsID = subCategories[indexPath.row].id
-            vc.productsTitle = subCategories[indexPath.row].name
+            vc.productsTitle = subCategories[indexPath.row].name.withoutHtml
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -167,5 +192,24 @@ extension UIImageView {
                 if let data = data { self.image = UIImage(data: data)?.withRenderingMode(.alwaysOriginal) }
             }
         }.resume()
+    }
+}
+
+extension String {
+    public var withoutHtml: String {
+        guard let data = self.data(using: .utf8) else {
+            return self
+        }
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
+            return self
+        }
+        
+        return attributedString.string
     }
 }

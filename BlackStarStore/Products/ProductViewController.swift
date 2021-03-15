@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ProductViewController: UIViewController {
+    
+    var notificationToken: NotificationToken? = nil
     
     @IBOutlet weak var productGalleryCollectionView: UICollectionView!
     @IBOutlet weak var productGalleryControl: UIPageControl!
@@ -53,19 +56,17 @@ class ProductViewController: UIViewController {
         
         productNameLabel.adjustsFontSizeToFitWidth = true
         productNameLabel.minimumScaleFactor = 0.2
-        productNameLabel.text = productName ?? "Не указано"
+        productNameLabel.text = productName?.withoutHtml ?? "Не указано"
         
         productPriceLabel.text = convertToPrice(productPrice ?? "Не указано")
         
         productDescriptionTextView.sizeToFit()
         productDescriptionTextView.isScrollEnabled = false
-        productDescriptionTextView.text = productDescription ?? "Не указано"
+        productDescriptionTextView.text = productDescription?.withoutHtml ?? "Не указано"
                 
         productGalleryControl.numberOfPages = productGallery.count
         productGalleryControl.isHidden = !(productGallery.count > 1)
         productGalleryControl.currentPage = 0
-        
-        cartButton()
     }
     
     // MARK: - Cart Button
@@ -75,7 +76,7 @@ class ProductViewController: UIViewController {
         present(secondVc, animated: true, completion: nil)
     }
     
-    public func cartButton() {
+    func addCartButton() {
         let cartButton = UIButton(type: .custom)
         cartButton.setImage(UIImage(systemName: "cart.fill"), for: .normal)
         cartButton.addTarget(self, action: #selector(openCart), for: .touchUpInside)
@@ -83,19 +84,47 @@ class ProductViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: cartButton)
         self.navigationItem.rightBarButtonItem = barButton
         barButton.setup()
-        barButton.setBadge(with: getProductToCartRealm().count)
+        barButton.setBadge(with: getCountOfProducts())
     }
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationItem.backBarButtonItem?.menu = nil
         setupProductFrame()
+        addCartButton()
         self.productGalleryCollectionView.reloadData()
+        
+        let realm = try! Realm()
+        let results = realm.objects(ProductInCart.self)
+        
+        // Observe Results Notifications
+        notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                self?.navigationItem.rightBarButtonItem?.setBadge(with: getCountOfProducts())
+            case .update(_,  _, _, _):
+                // Query results have changed, so apply them to the UITableView
+                self?.navigationItem.rightBarButtonItem?.setBadge(with: getCountOfProducts())
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
+    }
+    
+    deinit {
+        notificationToken?.invalidate()
     }
 }
 
 // MARK: - Extensions
 extension ProductViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productGallery.count
     }
@@ -106,7 +135,12 @@ extension ProductViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.backgroundColor = .systemGray5
         cell.productImageView.contentMode = .scaleAspectFill
         cell.productImageView.frame.size.width = view.frame.size.width
-        cell.productImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(productGallery[indexPath.row])", contentMode: .scaleAspectFill)
+        if productGallery.count != 0 {
+            cell.productImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(productGallery[indexPath.row])", contentMode: .scaleAspectFill)
+        } else {
+            cell.productImageView.image = UIImage(named: "no_image")
+        }
+        
         return cell
     }
 

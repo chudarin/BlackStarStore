@@ -73,5 +73,3 @@ enum OptionalTypes: Codable, Hashable {
         }
     }
 }
-
-
