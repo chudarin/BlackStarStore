@@ -102,10 +102,11 @@ extension ProductViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCollectionViewCell
+                
         cell.backgroundColor = .systemGray5
         cell.productImageView.contentMode = .scaleAspectFill
         cell.productImageView.frame.size.width = view.frame.size.width
-        cell.productImageView.image = !productGallery.isEmpty ? UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(productGallery[indexPath.row])")!)) : UIImage(named: "no_image")
+        cell.productImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(productGallery[indexPath.row])", contentMode: .scaleAspectFill)
         return cell
     }
 

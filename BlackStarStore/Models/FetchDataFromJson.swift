@@ -16,7 +16,7 @@ func loadCategories(completion: @escaping ([ShopCategory]) -> Void) {
     setupPreloader()
     SVProgressHUD.show(withStatus: "Загружаем категории")
     let apiURL = URL(string: "https://blackstarshop.ru/index.php?route=api/v1/categories")
-    let session = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
+    let _ = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
         let decodedData = try! JSONDecoder().decode(ParsedJSON.self, from: data!)
         var values: [ShopCategory] = []
         DispatchQueue.main.async {
@@ -26,8 +26,7 @@ func loadCategories(completion: @escaping ([ShopCategory]) -> Void) {
             completion(values)
             SVProgressHUD.dismiss()
         }
-    }
-    session.resume()
+    }.resume()
 }
 
 func loadProducts(id: Int, completion: @escaping ([Product]) -> Void) {
@@ -35,7 +34,7 @@ func loadProducts(id: Int, completion: @escaping ([Product]) -> Void) {
     SVProgressHUD.show(withStatus: "Загружаем товары")
     let url = "https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(id)"
     let apiURL = URL(string: url)
-    let session = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
+    let _ = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
         let decodedData = try! JSONDecoder().decode(ParsedProducts.self, from: data!)
         var products: [Product] = []
         DispatchQueue.main.async {
@@ -45,6 +44,5 @@ func loadProducts(id: Int, completion: @escaping ([Product]) -> Void) {
             completion(products)
             SVProgressHUD.dismiss()
         }
-    }
-    session.resume()
+    }.resume()
 }

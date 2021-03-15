@@ -79,12 +79,12 @@ extension ProductsListViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Product", for: indexPath) as! ProductsListCollectionViewCell
         
+        let product = products[indexPath.row]
         cell.productImageView.contentMode = .scaleAspectFill
-        
-        cell.productNameLabel.text = products[indexPath.row].name
-        cell.productDescriptionLabel.text = products[indexPath.row].description
-        cell.productImageView.image = products[indexPath.row].mainImage != "" ? UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(products[indexPath.row].mainImage)")!)) : UIImage(named: "no_image")
-        cell.productPriceLabel.text = convertToPrice(products[indexPath.row].price)
+        cell.productNameLabel.text = product.name
+        cell.productDescriptionLabel.text = product.description
+        cell.productImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(product.mainImage)", contentMode: .scaleAspectFill)
+        cell.productPriceLabel.text = convertToPrice(product.price)
         
         return cell
     }

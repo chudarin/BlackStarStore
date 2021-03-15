@@ -33,20 +33,17 @@ struct ParsedJSON: Codable {
     
 }
 
-struct ShopCategory: Codable {
+class ShopCategory: Codable {
     let name: String
-    let sortOrder: OptionalTypes
-    let image, iconImage, iconImageActive: String
+    let iconImage, image: String
     let subcategories: [ShopSubcategory]
 }
 
 // MARK: - Subcategory
-struct ShopSubcategory: Codable {
+class ShopSubcategory: Codable {
+    let name: String
     let id: OptionalTypes
     let iconImage: String
-    let sortOrder: OptionalTypes
-    let name: String
-    let type: String
 }
 
 enum OptionalTypes: Codable, Hashable {

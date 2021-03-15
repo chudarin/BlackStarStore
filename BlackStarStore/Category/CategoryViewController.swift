@@ -10,20 +10,20 @@ import UIKit
 class CategoryViewController: UIViewController {
 
     @IBOutlet weak var categoryTable: UITableView!
-    
+
     var categories: [ShopCategory] = []
     var subCategories: [ShopSubcategory] = []
-    var currentView: UIViewController = CategoryViewController()
+    var currentTitle = "Категории"
+    var isRootCategory = true
     
-    // MARK: - Prepare for Segue
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let vc = segue.destination as? SubCategoryViewController {
-//            if let cell = sender as? UITableViewCell, let indexPath = categoryTable.indexPath(for: cell) {
-//                vc.subCategories = categories[indexPath.row].subcategories
-//                vc.subCategoryTitle = categories[indexPath.row].name
-//            }
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ProductsListViewController, segue.identifier == "openProducts" {
+            if let cell = sender as? UITableViewCell, let indexPath = categoryTable.indexPath(for: cell) {
+                vc.productsID = subCategories[indexPath.row].id
+                vc.productsTitle = subCategories[indexPath.row].name
+            }
+        }
+    }
     
     // MARK: - Cart Button
     @objc func openCart() {
@@ -43,13 +43,23 @@ class CategoryViewController: UIViewController {
         barButton.setBadge(with: getProductToCartRealm().count)
     }
 
+    // Check for empty pages
+    private func showEmptyCategoryMessage() {
+        let labelSize = CGSize(width: 150, height: 30)
+        let emptyCategoryLabel = UILabel(frame: CGRect(x: 0, y: 0, width: labelSize.width, height: labelSize.height))
+        emptyCategoryLabel.text = "Категория пуста"
+        categoryTable.isHidden = true
+        view.backgroundColor = .systemGray5
+        view.addSubview(emptyCategoryLabel)
+        emptyCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        emptyCategoryLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        emptyCategoryLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+    }
+    
     // MARK: - Preparing Categories
-    func prepareCategories() {
+    private func prepareCategories() {
         loadCategories { (category) in
             self.categories = category
-            for i in category {
-                self.subCategories = i.subcategories
-            }
             self.categoryTable.reloadData()
         }
     }
@@ -58,7 +68,10 @@ class CategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareCategories()
-//        deleteALLProducts()
+        if subCategories.count == 0 && !isRootCategory {
+            showEmptyCategoryMessage()
+        }
+        self.title = currentTitle
         addCartButton()
     }
 }
@@ -66,23 +79,54 @@ class CategoryViewController: UIViewController {
 // MARK: - Extensions
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        if isRootCategory {
+            return categories.count
+        } else {
+            return subCategories.count
+        }
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
-        cell.categoryImageView.layer.cornerRadius = 52
-        cell.categoryNameLabel.text = categories[indexPath.row].name
-        cell.categoryImageView.image = categories[indexPath.row].image != "" ? UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(categories[indexPath.row].image)")!)) : UIImage(named: "no_image")
+        if isRootCategory {
+            let category = categories[indexPath.row]
+            cell.categoryNameLabel.text = category.name
+            if category.image != "" {
+                cell.categoryImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(category.image)", contentMode: .scaleAspectFit)
+            } else {
+                cell.categoryImageView.image = UIImage(named: "no_image")
+            }
+        } else {
+            let category = subCategories[indexPath.row]
+            cell.categoryImageView.layer.cornerRadius = 5
+            cell.categoryNameLabel.text = category.name
+            if category.iconImage != "" {
+                cell.categoryImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(category.iconImage)", contentMode: .scaleAspectFit)
+            } else {
+                cell.categoryImageView.image = UIImage(named: "no_image")
+            }
+            
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let vc = storyboard?.instantiateViewController(identifier: "CategoryVC") as! CategoryViewController
-        vc.viewDidLoad()
-        self.navigationController?.pushViewController(vc, animated: true)
+        if isRootCategory {
+            let vc = storyboard?.instantiateViewController(identifier: "CategoryVC") as! CategoryViewController
+            vc.currentTitle = categories[indexPath.row].name
+            vc.subCategories = categories[indexPath.row].subcategories
+            vc.isRootCategory = false
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = storyboard?.instantiateViewController(identifier: "ProductsListVC") as! ProductsListViewController
+            vc.productsID = subCategories[indexPath.row].id
+            vc.productsTitle = subCategories[indexPath.row].name
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
@@ -112,5 +156,16 @@ extension UIBarButtonItem {
         productCounter.minimumScaleFactor = 0.1
         productCounter.adjustsFontSizeToFitWidth = true
         customView?.addSubview(productCounter)
+    }
+}
+
+extension UIImageView {
+    func downloadImageFrom(link: String, contentMode: UIView.ContentMode) {
+        URLSession.shared.dataTask(with: URL(string: link)!) { (data, _, _) in
+            DispatchQueue.main.async {
+                self.contentMode = contentMode
+                if let data = data { self.image = UIImage(data: data)?.withRenderingMode(.alwaysOriginal) }
+            }
+        }.resume()
     }
 }
