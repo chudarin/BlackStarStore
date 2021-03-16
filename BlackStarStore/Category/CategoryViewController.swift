@@ -118,7 +118,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
             let category = categories[indexPath.row]
             cell.categoryNameLabel.text = category.name.withoutHtml
             if category.image != "" {
-                cell.categoryImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(category.image)", contentMode: .scaleAspectFit)
+                cell.categoryImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(category.image.cleanURL)", contentMode: .scaleAspectFit)
             } else {
                 cell.categoryImageView.image = UIImage(named: "no_image")
             }
@@ -127,7 +127,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
             cell.categoryImageView.layer.cornerRadius = 5
             cell.categoryNameLabel.text = category.name.withoutHtml
             if category.iconImage != "" {
-                cell.categoryImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(category.iconImage)", contentMode: .scaleAspectFit)
+                cell.categoryImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(category.iconImage.cleanURL)", contentMode: .scaleAspectFit)
             } else {
                 cell.categoryImageView.image = UIImage(named: "no_image")
             }
@@ -211,5 +211,9 @@ extension String {
         }
         
         return attributedString.string
+    }
+    public var cleanURL: String {
+        return self.replacingOccurrences(of: ".-h", with: "-h",
+            options: NSString.CompareOptions.literal, range:nil)
     }
 }

@@ -50,10 +50,10 @@ class ProductsListViewController: UIViewController {
                 vc.productPrice = products[indexPath.row].price
                 vc.productDescription = products[indexPath.row].description
                 for i in products[indexPath.row].productImages {
-                    vc.productGallery.append(i.imageURL)
+                    vc.productGallery.append(i.imageURL.cleanURL)
                 }
                 vc.productOffers = products[indexPath.row].offers
-                vc.productImageURL = "https://blackstarshop.ru/\(products[indexPath.row].mainImage)"
+                vc.productImageURL = "https://blackstarshop.ru/\(products[indexPath.row].mainImage.cleanURL)"
             }
         }
     }
@@ -107,7 +107,7 @@ extension ProductsListViewController: UICollectionViewDelegate, UICollectionView
         cell.productImageView.contentMode = .scaleAspectFill
         cell.productNameLabel.text = product.name.withoutHtml
         cell.productDescriptionLabel.text = product.description.withoutHtml
-        cell.productImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(product.mainImage)", contentMode: .scaleAspectFill)
+        cell.productImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(product.mainImage.cleanURL)", contentMode: .scaleAspectFill)
         cell.productPriceLabel.text = convertToPrice(product.price)
         
         return cell

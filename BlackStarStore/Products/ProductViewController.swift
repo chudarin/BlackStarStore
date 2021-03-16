@@ -97,6 +97,7 @@ class ProductViewController: UIViewController {
         setupProductFrame()
         addCartButton()
         self.productGalleryCollectionView.reloadData()
+        print(productImageURL)
         
         let realm = try! Realm()
         let results = realm.objects(ProductInCart.self)
@@ -126,7 +127,11 @@ class ProductViewController: UIViewController {
 extension ProductViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return productGallery.count
+        if productGallery.count != 0 {
+            return productGallery.count
+        } else {
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -138,7 +143,7 @@ extension ProductViewController: UICollectionViewDelegate, UICollectionViewDataS
         if productGallery.count != 0 {
             cell.productImageView.downloadImageFrom(link: "https://blackstarshop.ru/\(productGallery[indexPath.row])", contentMode: .scaleAspectFill)
         } else {
-            cell.productImageView.image = UIImage(named: "no_image")
+            cell.productImageView.downloadImageFrom(link: "\(productImageURL)", contentMode: .scaleAspectFill)
         }
         
         return cell

@@ -60,8 +60,14 @@ func getCountOfProducts() -> Int {
 }
 
 func deleteProductToCartRealm(product number: Int) {
-    try! realm.write {
-        realm.delete(products[number])
+    if products[number].productQuantity > 1 {
+        try! realm.write {
+            products[number].productQuantity -= 1
+        }
+    } else {
+        try! realm.write {
+            realm.delete(products[number])
+        }
     }
 }
 

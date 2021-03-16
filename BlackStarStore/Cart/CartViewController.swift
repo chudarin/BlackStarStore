@@ -76,8 +76,8 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         cell.productNameLabel.text = product.productName
         cell.productSizeLabel.text = "Размер: \(product.productSize)"
         cell.productColorLabel.text = "Цвет: \(product.productColor)"
-        cell.productImageView.image = product.productImageURL != "" ? UIImage(data: try! Data(contentsOf: URL(string: product.productImageURL )!)) : UIImage(named: "no_image")
-        if product.productQuantity > 0 {
+        cell.productImageView.image = product.productImageURL != "" ? UIImage(data: try! Data(contentsOf: URL(string: product.productImageURL.cleanURL )!)) : UIImage(named: "no_image")
+        if product.productQuantity > 1 {
             cell.productPriceLabel.text = "\(product.productQuantity) x \(convertToPrice(product.productPrice))"
         } else {
             cell.productPriceLabel.text = convertToPrice(product.productPrice)
