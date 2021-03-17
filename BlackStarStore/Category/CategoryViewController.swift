@@ -140,6 +140,13 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        if categories[indexPath.row].subcategories.count == 0 && isRootCategory {
+            let vc = storyboard?.instantiateViewController(identifier: "ProductsListVC") as! ProductsListViewController
+            vc.productsID = categories[indexPath.row].id
+            vc.productsTitle = subCategories[indexPath.row].name.withoutHtml
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         if isRootCategory {
             let vc = storyboard?.instantiateViewController(identifier: "CategoryVC") as! CategoryViewController
             vc.currentTitle = categories[indexPath.row].name.withoutHtml
