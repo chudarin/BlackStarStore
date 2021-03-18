@@ -12,18 +12,18 @@ func setupPreloader() {
     SVProgressHUD.setBackgroundColor(.systemGray5)
 }
 
-func loadCategories(completion: @escaping ([ShopCategory]) -> Void) {
+func parsingJSON(completion: @escaping (ParsedJSON) -> Void) {
     setupPreloader()
     SVProgressHUD.show(withStatus: "Загружаем категории")
     let apiURL = URL(string: "https://blackstarshop.ru/index.php?route=api/v1/categories")
     let _ = URLSession.shared.dataTask(with: apiURL!) { (data, _, _) in
         let decodedData = try! JSONDecoder().decode(ParsedJSON.self, from: data!)
-        var values: [ShopCategory] = []
+//        var values: [ParsedJSON] = []
         DispatchQueue.main.async {
-            for (_, el) in decodedData.innerArray.enumerated() {
-                values.append(el.value)
-            }
-            completion(values)
+//            for (_, el) in decodedData.innerArray.enumerated() {
+//                values.append(el.value)
+//            }
+            completion(decodedData)
             SVProgressHUD.dismiss()
         }
     }.resume()

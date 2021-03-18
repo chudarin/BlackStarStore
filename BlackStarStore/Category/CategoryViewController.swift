@@ -14,6 +14,8 @@ class CategoryViewController: UIViewController {
 
     @IBOutlet weak var categoryTable: UITableView!
 
+    var parsedJSON: ParsedJSON?
+    var categoryID: [Int] = []
     var categories: [ShopCategory] = []
     var subCategories: [ShopSubcategory] = []
     var currentTitle = "Категории"
@@ -22,7 +24,7 @@ class CategoryViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ProductsListViewController, segue.identifier == "openProducts" {
             if let cell = sender as? UITableViewCell, let indexPath = categoryTable.indexPath(for: cell) {
-                vc.productsID = subCategories[indexPath.row].id
+                vc.productsID = decodeProductsID(id: subCategories[indexPath.row].id)
                 vc.productsTitle = subCategories[indexPath.row].name
             }
         }
@@ -45,24 +47,24 @@ class CategoryViewController: UIViewController {
         barButton.setup()
         barButton.setBadge(with: getCountOfProducts())
     }
-
-    // Check for empty pages
-    private func showEmptyCategoryMessage() {
-        let labelSize = CGSize(width: 150, height: 30)
-        let emptyCategoryLabel = UILabel(frame: CGRect(x: 0, y: 0, width: labelSize.width, height: labelSize.height))
-        emptyCategoryLabel.text = "Категория пуста"
-        categoryTable.isHidden = true
-        view.backgroundColor = .systemGray5
-        view.addSubview(emptyCategoryLabel)
-        emptyCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
-        emptyCategoryLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        emptyCategoryLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+    
+    func decodeProductsID(id: OptionalTypes) -> Int {
+        switch id {
+        case .integer(let i): return i
+        case .string(let s): return (s as NSString).integerValue
+        }
     }
     
     // MARK: - Preparing Categories
     private func prepareCategories() {
-        loadCategories { (category) in
-            self.categories = category
+        parsingJSON { (json) in
+            self.parsedJSON = json
+            if let json = self.parsedJSON {
+                for (_, el) in json.innerArray.enumerated() {
+                    self.categories.append(el.value)
+                    self.categoryID.append((el.key as NSString).integerValue)
+                }
+            }
             self.categoryTable.reloadData()
         }
     }
@@ -71,9 +73,6 @@ class CategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareCategories()
-        if subCategories.count == 0 && !isRootCategory {
-            showEmptyCategoryMessage()
-        }
         self.title = currentTitle
         addCartButton()
         
@@ -111,7 +110,6 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
         if isRootCategory {
@@ -131,7 +129,6 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.categoryImageView.image = UIImage(named: "no_image")
             }
-            
         }
         
         return cell
@@ -140,22 +137,25 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if categories[indexPath.row].subcategories.count == 0 && isRootCategory {
-            let vc = storyboard?.instantiateViewController(identifier: "ProductsListVC") as! ProductsListViewController
-            vc.productsID = categories[indexPath.row].id
-            vc.productsTitle = subCategories[indexPath.row].name.withoutHtml
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        if isRootCategory {
+        // Если корневая и есть сабкатегории
+        if isRootCategory && !categories[indexPath.row].subcategories.isEmpty {
             let vc = storyboard?.instantiateViewController(identifier: "CategoryVC") as! CategoryViewController
             vc.currentTitle = categories[indexPath.row].name.withoutHtml
             vc.subCategories = categories[indexPath.row].subcategories
             vc.isRootCategory = false
             self.navigationController?.pushViewController(vc, animated: true)
+            
+        // Если корневая и нет сабкатегорий
+        } else if isRootCategory && categories[indexPath.row].subcategories.isEmpty {
+            let vc = storyboard?.instantiateViewController(identifier: "ProductsListVC") as! ProductsListViewController
+            vc.productsID = categoryID[indexPath.row]
+            vc.productsTitle = categories[indexPath.row].name.withoutHtml
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        // Все остальные
         } else {
             let vc = storyboard?.instantiateViewController(identifier: "ProductsListVC") as! ProductsListViewController
-            vc.productsID = subCategories[indexPath.row].id
+            vc.productsID = decodeProductsID(id: subCategories[indexPath.row].id)
             vc.productsTitle = subCategories[indexPath.row].name.withoutHtml
             self.navigationController?.pushViewController(vc, animated: true)
         }

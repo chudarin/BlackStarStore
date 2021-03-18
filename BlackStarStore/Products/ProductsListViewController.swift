@@ -14,16 +14,10 @@ class ProductsListViewController: UIViewController {
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
-    var productsID: OptionalTypes?
+    var productsID: Int?
+    var categoryID: Int?
     var productsTitle: String = ""
     var products: [Product] = []
-    
-    func decodeProductsID(id: OptionalTypes) -> Int {
-        switch id {
-        case .integer(let i): return i
-        case .string(let s): return Int(s)!
-        }
-    }
     
     @objc func openCart() {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
@@ -58,13 +52,32 @@ class ProductsListViewController: UIViewController {
         }
     }
     
+    // Check for empty pages
+    private func showEmptyCategoryMessage() {
+        let labelSize = CGSize(width: 150, height: 30)
+        let emptyCategoryLabel = UILabel(frame: CGRect(x: 0, y: 0, width: labelSize.width, height: labelSize.height))
+        emptyCategoryLabel.text = "Категория пуста"
+        productsCollectionView.isHidden = true
+        view.backgroundColor = .systemGray5
+        view.addSubview(emptyCategoryLabel)
+        emptyCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        emptyCategoryLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        emptyCategoryLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+    }
+    
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadProducts(id: decodeProductsID(id: productsID!)) { (parsedProducts) in
-            self.products = parsedProducts
-            self.productsCollectionView.reloadData()
+        print(" АЛЛО ЭТО — \(productsID)")
+        if productsID != 0 && productsID != 123  {
+            loadProducts(id: productsID!) { (parsedProducts) in
+                self.products = parsedProducts
+                self.productsCollectionView.reloadData()
+            }
+        } else {
+            showEmptyCategoryMessage()
         }
+        
         self.title = productsTitle
         addCartButton()
         

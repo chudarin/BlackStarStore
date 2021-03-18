@@ -23,7 +23,7 @@ struct ParsedJSON: Codable {
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CustomCodingKeys.self)
-        
+
         self.innerArray = [String: ShopCategory]()
         for key in container.allKeys {
             let value = try container.decode(ShopCategory.self, forKey: CustomCodingKeys(stringValue: key.stringValue)!)
