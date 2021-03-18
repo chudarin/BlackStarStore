@@ -68,7 +68,6 @@ class ProductsListViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(" АЛЛО ЭТО — \(productsID)")
         if productsID != 0 && productsID != 123  {
             loadProducts(id: productsID!) { (parsedProducts) in
                 self.products = parsedProducts
